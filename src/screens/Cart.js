@@ -6,7 +6,6 @@ import Footer from '../screens/Cart/Footer';
 import Basket from '../screens/Cart/BasketComponent';
 
 const Cart = ({ navigation}) => {
-        const { navigation } = this.props
         return (
             <View style={styles.container}>
                 <Header />
