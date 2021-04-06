@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 
-class DetailMenu extends Component {
-    render() {
+const  DetailMenu = ({ navigation }) => {
         return (
             <ScrollView style={styles.container}>
 
@@ -52,7 +51,7 @@ class DetailMenu extends Component {
                     flexDirection: 'row',
                     alignItems: 'center'
                 }}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Cart')}
+                    <TouchableOpacity onPress={() => navigation.navigate('Cart')}
                         style={styles.buttonStyle1}>
                         <Text style={styles.buttonTitle}>Pesan</Text>
                     </TouchableOpacity>
@@ -65,7 +64,6 @@ class DetailMenu extends Component {
 
             </ScrollView>
         )
-    }
 }
 
 export default DetailMenu

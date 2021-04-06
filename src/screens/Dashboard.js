@@ -7,10 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { SliderBox } from 'react-native-image-slider-box'
 import CardSilder from 'react-native-cards-slider'
 
-class Dashboard extends Component {
-  constructor(props) {
-    super(props)
-
+const Dashboard = ({ navigation }) =>{
     this.state = {
       country: 'pilih',
       images: [
@@ -20,9 +17,7 @@ class Dashboard extends Component {
         'https://cdn.idntimes.com/content-images/post/20170721/resep-rawon-98d900d3e27085f192f57e3167b4d834_600x400.jpeg', // url gambar
       ],
     }
-  }
 
-  render() {
     const { navigation } = this.props
     return (
       <ScrollView style={styles.container}>
@@ -122,7 +117,7 @@ class Dashboard extends Component {
             {/* button detail */}
             <TouchableOpacity
               style={styles.buttonStyle}
-              onPress={() => this.props.navigation.navigate('DetailMenu')}
+              onPress={() => navigation.navigate('DetailMenu')}
             >
               <Text style={styles.buttonTitle}>Detail</Text>
             </TouchableOpacity>
@@ -270,7 +265,6 @@ class Dashboard extends Component {
       </ScrollView>
     )
   }
-}
 export default Dashboard
 
 const styles = StyleSheet.create({

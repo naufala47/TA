@@ -5,8 +5,7 @@ import Item from '../screens/Cart/Item';
 import Footer from '../screens/Cart/Footer';
 import Basket from '../screens/Cart/BasketComponent';
 
-class Cart extends Component {
-    render() {
+const Cart = ({ navigation}) => {
         const { navigation } = this.props
         return (
             <View style={styles.container}>
@@ -16,7 +15,6 @@ class Cart extends Component {
                 <Footer onPress={() => navigation.navigate('Checkout')} />
             </View>
         )
-    }
 }
 
 export default Cart
