@@ -62,9 +62,12 @@ const Resep = ({navigation, route}) => {
         <FlatList
           data={datas.stepId}
           renderItem={({item}) => (
-            <Text style={{marginLeft: 30, textAlign: 'justify'}}>
-              {item.instructions}{' '}
-            </Text>
+            <View>
+              <Text style={{marginLeft: 90, textAlign: 'justify'}}>
+                {item.instructions}{' '}
+              </Text>
+              <Image source={{uri: item.imageUrl}} />
+            </View>
           )}
         />
         <Text style={styles.h2}>Bahan :</Text>
@@ -84,11 +87,8 @@ const Resep = ({navigation, route}) => {
           marginTop: 30,
         }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Cart')}
-          style={styles.buttonStyle1}>
-          <Text style={styles.buttonTitle}>Pesan</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonStyle2}>
+          style={styles.buttonStyle2}
+          onPress={() => navigation.navigate('Cart')}>
           <Text style={styles.buttonTitle}>Tambah ke Cart</Text>
         </TouchableOpacity>
       </View>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#00345e',
     width: 180,
     height: 48,
-    marginLeft: 20,
+    marginLeft: 100,
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',

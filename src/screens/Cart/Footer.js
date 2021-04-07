@@ -1,26 +1,22 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import TotalComp from './TotalComponent';
 
-const Footer = ({ navigation, onPress }) => {
+const Footer = ({navigation, onPress}) => {
   const {
     containerStyle,
     buttonContainerStyle,
     closeButtonStyle,
-    checkoutButtonStyle
-  } = styles
+    checkoutButtonStyle,
+    btnCheckout,
+  } = styles;
   return (
     <View style={containerStyle}>
       <TotalComp />
       <View style={buttonContainerStyle}>
-        <TouchableOpacity onPress={onPress}>
-          <View style={closeButtonStyle}>
-            <Text style={{ color: '#fff' }}>Close</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={onPress}>
+        <TouchableOpacity onPress={onPress} style={styles.btnCheckout}>
           <View style={checkoutButtonStyle}>
-            <Text style={{ color: '#fff' }}>Go to checkout</Text>
+            <Text style={{color: '#fff'}}>Go to checkout</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -41,20 +37,16 @@ const styles = {
     justifyContent: 'space-between',
     paddingTop: 15,
   },
-  closeButtonStyle: {
-    backgroundColor: '#7f8c8d',
-    padding: 10,
-    paddingRight: 30,
-    paddingLeft: 30,
-    borderRadius: 3,
-  },
   checkoutButtonStyle: {
     backgroundColor: '#f39c12',
     padding: 10,
     paddingRight: 60,
     paddingLeft: 60,
     borderRadius: 3,
-  }
+  },
+  btnCheckout: {
+    marginLeft: 140,
+  },
 };
 
-export default Footer
+export default Footer;

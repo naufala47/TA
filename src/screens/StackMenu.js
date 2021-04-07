@@ -1,5 +1,5 @@
-import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
 import {
   StartScreen,
   LoginScreen,
@@ -13,10 +13,11 @@ import {
   EditProfile,
   Shipping,
   Resep,
-  DetailResep
-} from '../screens'
+  DetailResep,
+  Success,
+} from '../screens';
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 const StackMenu = () => {
   return (
@@ -32,13 +33,15 @@ const StackMenu = () => {
       <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
       <Stack.Screen name="Resep" component={Resep} />
       <Stack.Screen name="DetailResep" component={DetailResep} />
+      <Stack.Screen name="Success" component={Success} />
+
       <Stack.Screen
         name="ForgotPasswordScreen"
         component={ForgotPasswordScreen}
       />
       <Stack.Screen name="Shipping" component={Shipping} />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
-export default StackMenu
+export default StackMenu;

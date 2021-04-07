@@ -1,12 +1,19 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Text, View, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Header = ({navigation}) => {
+const Header = ({navigation, onPress}) => {
   return (
     <View style={styles.headerStyle}>
-      <Icon name="ios-close" size={35} color="#a8a9ad" onPress={() => navigation.navigate('Dashboard')} />
-      <Text style={{ fontSize: 18 }}>Shopping Cart</Text>
+      <TouchableOpacity onPress={onPress}>
+        <Icon
+          name="angle-double-left"
+          size={50}
+          color="black"
+          // onPress={handlePress}
+        />
+      </TouchableOpacity>
+      <Text style={{fontSize: 18}}>Shopping Cart</Text>
       <Text>Empty</Text>
     </View>
   );
@@ -23,8 +30,8 @@ const styles = {
     paddingLeft: 15,
     paddingRight: 15,
     borderBottomWidth: 1,
-    borderColor: '#e2e2e2'
-  }
+    borderColor: '#e2e2e2',
+  },
 };
 
 export default Header;

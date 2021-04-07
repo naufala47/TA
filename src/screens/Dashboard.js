@@ -132,7 +132,7 @@ const Dashboard = ({navigation}) => {
               backgroundColor: 'skyblue',
               borderRadius: 10,
               marginTop: 25,
-              marginRight: 15,
+              marginRight: 5,
               marginLeft: 25,
             }}>
             <Image
