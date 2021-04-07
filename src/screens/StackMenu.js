@@ -11,7 +11,9 @@ import {
   Checkout,
   Payment,
   EditProfile,
-  Shipping
+  Shipping,
+  Resep,
+  DetailResep
 } from '../screens'
 
 const Stack = createStackNavigator()
@@ -28,6 +30,8 @@ const StackMenu = () => {
       <Stack.Screen name="StartScreen" component={StartScreen} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+      <Stack.Screen name="Resep" component={Resep} />
+      <Stack.Screen name="DetailResep" component={DetailResep} />
       <Stack.Screen
         name="ForgotPasswordScreen"
         component={ForgotPasswordScreen}

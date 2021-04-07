@@ -1,13 +1,24 @@
-import React, {useState} from 'react';
-import {ScrollView, Text, View, StyleSheet, Image} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  ScrollView,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  FlatList,
+} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {block} from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {SliderBox} from 'react-native-image-slider-box';
 import CardSilder from 'react-native-cards-slider';
+import {render} from 'react-dom';
+import axios from 'axios';
 
+const url = 'https://admin-appv1.herokuapp.com/api/v1/items/';
 const Dashboard = ({navigation}) => {
+  const [datas, setDatas] = useState([]);
   const [country, setCountry] = useState('pilih');
   const [images, setImages] = useState([
     'https://blogpictures.99.co/makanan-khas-indonesia-header.png',
@@ -15,6 +26,7 @@ const Dashboard = ({navigation}) => {
     'https://img.okezone.com/content/2019/07/04/298/2074589/4-makanan-khas-indonesia-yang-paling-diburu-di-luar-negeri-gOjMyZizaf.jpg',
     'https://cdn.idntimes.com/content-images/post/20170721/resep-rawon-98d900d3e27085f192f57e3167b4d834_600x400.jpeg', // url gambar
   ]);
+
   // this.state = {
   //   country: 'pilih',
   //   images: [
@@ -24,6 +36,23 @@ const Dashboard = ({navigation}) => {
   //     'https://cdn.idntimes.com/content-images/post/20170721/resep-rawon-98d900d3e27085f192f57e3167b4d834_600x400.jpeg', // url gambar
   //   ],
   // };
+
+  useEffect(() => {
+    getAPI();
+  }, []);
+
+  const getAPI = () => {
+    axios
+      .get(url)
+      .then(function (response) {
+        console.log(response.data.item);
+        setDatas(response.data.item);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View
@@ -34,23 +63,14 @@ const Dashboard = ({navigation}) => {
           justifyContent: 'space-between',
         }}>
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <Icon name="bars" size={25} color="#0099ff" />
+          <Icon name="bars" size={30} color="#0099ff" />
         </TouchableOpacity>
         {/* h1 menu */}
         <Text style={styles.h1}>MENU</Text>
 
         {/* icon cart */}
         <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
-          <Image
-            style={{
-              width: 40,
-              height: 40,
-            }}
-            source={{
-              uri:
-                'https://www.pngfind.com/pngs/m/143-1434681_digicollect-cart-icon-png-download-submit-order-icon.png',
-            }}
-          />
+          <Icon name="cart-plus" size={30} color="#0099ff" />
         </TouchableOpacity>
       </View>
 
@@ -99,149 +119,50 @@ const Dashboard = ({navigation}) => {
       {/* tutup image slider */}
 
       {/* card slider */}
-      <CardSilder style={{marginTop: 30}}>
-        <View
-          style={{
-            height: 170,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'skyblue',
-          }}>
-          <Text style={{color: 'white', fontSize: 24, fontWeight: 'bold'}}>
-            menu1
-          </Text>
-          {/* button detail */}
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={() => navigation.navigate('DetailMenu')}>
-            <Text style={styles.buttonTitle}>Detail</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            height: 170,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'lightsalmon',
-          }}>
-          <Text style={{color: 'white', fontSize: 24, fontWeight: 'bold'}}>
-            menu2
-          </Text>
-          {/* button detail */}
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={() => navigation.navigate('DetailMenu')}>
-            <Text style={styles.buttonTitle}>Detail</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            height: 170,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'teal',
-          }}>
-          <Text style={{color: 'white', fontSize: 24, fontWeight: 'bold'}}>
-            menu3
-          </Text>
-          {/* button detail */}
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={() => navigation.navigate('DetailMenu')}>
-            <Text style={styles.buttonTitle}>Detail</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            height: 170,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'lightpink',
-          }}>
-          <Text style={{color: 'white', fontSize: 24, fontWeight: 'bold'}}>
-            menu4
-          </Text>
-          {/* button detail */}
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={() => navigation.navigate('DetailMenu')}>
-            <Text style={styles.buttonTitle}>Detail</Text>
-          </TouchableOpacity>
-        </View>
-      </CardSilder>
-      {/* tutup card slider */}
-
-      {/* card slider */}
-      <CardSilder style={{marginTop: 30}}>
-        <View
-          style={{
-            height: 170,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'skyblue',
-          }}>
-          <Text style={{color: 'white', fontSize: 24, fontWeight: 'bold'}}>
-            menu1
-          </Text>
-          {/* button detail */}
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={() => navigation.navigate('DetailMenu')}>
-            <Text style={styles.buttonTitle}>Detail</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            height: 170,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'lightsalmon',
-          }}>
-          <Text style={{color: 'white', fontSize: 24, fontWeight: 'bold'}}>
-            menu2
-          </Text>
-          {/* button detail */}
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={() => navigation.navigate('DetailMenu')}>
-            <Text style={styles.buttonTitle}>Detail</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            height: 170,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'teal',
-          }}>
-          <Text style={{color: 'white', fontSize: 24, fontWeight: 'bold'}}>
-            menu3
-          </Text>
-          {/* button detail */}
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={() => navigation.navigate('DetailMenu')}>
-            <Text style={styles.buttonTitle}>Detail</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            height: 170,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'lightpink',
-          }}>
-          <Text style={{color: 'white', fontSize: 24, fontWeight: 'bold'}}>
-            menu4
-          </Text>
-          {/* button detail */}
-          <TouchableOpacity
-            style={styles.buttonStyle}
-            onPress={() => navigation.navigate('DetailMenu')}>
-            <Text style={styles.buttonTitle}>Detail</Text>
-          </TouchableOpacity>
-        </View>
-      </CardSilder>
+      <FlatList
+        horizontal
+        data={datas}
+        renderItem={({item}) => (
+          <View
+            style={{
+              height: 225,
+              width: 250,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'skyblue',
+              borderRadius: 10,
+              marginTop: 25,
+              marginRight: 15,
+              marginLeft: 25,
+            }}>
+            <Image
+              style={{width: 200, height: 100, borderRadius: 10}}
+              source={{
+                uri:
+                  'https://blogpictures.99.co/makanan-khas-indonesia-header.png',
+              }}
+            />
+            <Text
+              style={{
+                color: 'white',
+                fontSize: 18,
+                lineHeight: 50,
+                fontWeight: 'bold',
+              }}>
+              {item.name}
+            </Text>
+            <TouchableOpacity
+              style={styles.buttonStyle}
+              onPress={() =>
+                navigation.navigate('Resep', {
+                  id: item._id,
+                })
+              }>
+              <Text style={styles.buttonTitle}>Detail</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      />
       {/* tutup card slider */}
     </ScrollView>
   );
@@ -251,12 +172,12 @@ export default Dashboard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 60,
+    marginTop: 40,
   },
   h1: {
     color: '#0099ff',
     marginLeft: 20,
-    fontSize: 16,
+    fontSize: 20,
     textAlign: 'center',
     fontWeight: 'bold',
   },
