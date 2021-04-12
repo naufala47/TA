@@ -21,7 +21,7 @@ const Stack = createStackNavigator();
 
 const StackMenu = () => {
   return (
-    <Stack.Navigator headerMode="none">
+    <Stack.Navigator headerMode="none" initialRouteName="StartScreen">
       <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="DetailMenu" component={DetailMenu} />
       <Stack.Screen name="Cart" component={Cart} />

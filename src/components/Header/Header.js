@@ -1,17 +1,49 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Text } from 'react-native-paper';
-import { theme } from '../../core/theme'
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {IcBack} from '../../assets';
+const Header = ({title, subTitle, onBack}) => {
+  return (
+    <View style={styles.container}>
+      {onBack && (
+        <TouchableOpacity onPress={onBack}>
+          <View style={styles.back}>
+            <IcBack />
+          </View>
+        </TouchableOpacity>
+      )}
+      <View>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.subTitle}>{subTitle}</Text>
+      </View>
+    </View>
+  );
+};
 
-const Header = (props) => <Text style={styles.header} {...props} />
+export default Header;
 
 const styles = StyleSheet.create({
-  header: {
-    fontSize: 21,
-    color: theme.colors.primary,
-    fontWeight: 'bold',
-    paddingVertical: 12,
+  container: {
+    backgroundColor: 'white',
+    paddingHorizontal: 24,
+    paddingTop: 30,
+    paddingBottom: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-})
-
-export default Header
+  title: {
+    fontSize: 22,
+    fontFamily: 'Poppins-Medium',
+    color: '#020202',
+  },
+  subTitle: {
+    fontSize: 14,
+    fontFamily: 'Poppins-Light',
+    color: '#8d92a3',
+  },
+  back: {
+    padding: 16,
+    marginRight: 16,
+    marginLeft: -10,
+  },
+});

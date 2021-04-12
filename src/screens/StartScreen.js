@@ -1,27 +1,33 @@
-import React from 'react'
-import Background from '../components/Background'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import Button from '../components/Button'
-import Paragraph from '../components/Paragraph'
+import React, {useEffect} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {Logo} from '../assets';
 
-const StartScreen = ({ navigation }) => (
-  <Background>
-    <Logo />
-    <Header>Let's Cook</Header>
-    <Paragraph>
-      The easiest way to start delicious dinner.
-    </Paragraph>
-    <Button mode="contained" onPress={() => navigation.navigate('LoginScreen')}>
-      Login
-    </Button>
-    <Button
-      mode="outlined"
-      onPress={() => navigation.navigate('RegisterScreen')}
-    >
-      Sign Up
-    </Button>
-  </Background>
-)
+const SplashScreen = ({navigation}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.replace('LoginScreen');
+    }, 2002);
+  }, []);
 
-export default StartScreen
+  return (
+    <View style={styles.container}>
+      <Logo />
+      <View style={{height: 38}} />
+      <Text
+        style={{fontSize: 32, color: '#020202', fontFamily: 'Poppins-Medium'}}>
+        Lets Cook
+      </Text>
+    </View>
+  );
+};
+
+export default SplashScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#ffc700',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

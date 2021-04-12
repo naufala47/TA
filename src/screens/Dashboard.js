@@ -14,7 +14,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {SliderBox} from 'react-native-image-slider-box';
 import CardSilder from 'react-native-cards-slider';
 import {render} from 'react-dom';
+import Gap from '../components/Gap';
+import FoodCard from '../components/FoodCard';
 import axios from 'axios';
+
+import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../assets';
 
 const url = 'https://admin-appv1.herokuapp.com/api/v1/items/';
 const Dashboard = ({navigation}) => {
@@ -74,16 +78,12 @@ const Dashboard = ({navigation}) => {
         </TouchableOpacity>
       </View>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
+      <View>
         {/* text input search */}
         <TextInput style={styles.textInput} placeholder="Search" />
 
         {/* dropdown  */}
-        <DropDownPicker
+        {/* <DropDownPicker
           //item dropdown
           items={[
             {label: 'Pilih', value: 'pilih', hidden: true},
@@ -99,7 +99,7 @@ const Dashboard = ({navigation}) => {
           }}
           dropDownStyle={{backgroundColor: '#fafafa'}}
           onChangeItem={item => setCountry(item.value)}
-        />
+        /> */}
         {/* dropdown  */}
       </View>
 
@@ -116,54 +116,32 @@ const Dashboard = ({navigation}) => {
         autoplay
         circleLoop
       />
-      {/* tutup image slider */}
-
-      {/* card slider */}
-      <FlatList
-        horizontal
-        data={datas}
-        renderItem={({item}) => (
-          <View
-            style={{
-              height: 225,
-              width: 250,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'skyblue',
-              borderRadius: 10,
-              marginTop: 25,
-              marginRight: 5,
-              marginLeft: 25,
-            }}>
-            <Image
-              style={{width: 200, height: 100, borderRadius: 10}}
-              source={{
-                uri:
-                  'https://blogpictures.99.co/makanan-khas-indonesia-header.png',
-              }}
-            />
-            <Text
-              style={{
-                color: 'white',
-                fontSize: 18,
-                lineHeight: 50,
-                fontWeight: 'bold',
-              }}>
-              {item.name}
-            </Text>
-            <TouchableOpacity
-              style={styles.buttonStyle}
-              onPress={() =>
-                navigation.navigate('Resep', {
-                  id: item._id,
-                })
-              }>
-              <Text style={styles.buttonTitle}>Detail</Text>
-            </TouchableOpacity>
+      <View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <View style={styles.foodCardContainer}>
+            <Gap width={24} />
+            {/* <FoodCard image={FoodDummy1} />
+            <FoodCard image={FoodDummy3} />
+            <FoodCard image={FoodDummy2} />
+            <FoodCard image={FoodDummy4} /> */}
+            {datas.map(data => {
+              return (
+                <FoodCard
+                  key={data.id}
+                  image={{
+                    uri: data.imageId[0]
+                      ? `https://admin-appv1.herokuapp.com/${data.imageId[0].imageUrl}`
+                      : '',
+                  }}
+                  name={data.name}
+                  category={data.categoryId.name}
+                  onPress={() => navigation.navigate('DetailMenu', data)}
+                />
+              );
+            })}
           </View>
-        )}
-      />
-      {/* tutup card slider */}
+        </ScrollView>
+      </View>
     </ScrollView>
   );
 };
@@ -206,15 +184,25 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   textInput: {
-    height: 48,
-    width: 200,
+    width: 350,
     borderRadius: 5,
-    overflow: 'hidden',
     backgroundColor: 'white',
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 30,
-    marginRight: 5,
+    marginLeft: 20,
+    marginRight: 20,
+    marginVertical: 20,
     paddingLeft: 16,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  foodCardContainer: {
+    flexDirection: 'row',
+    marginVertical: 12,
   },
 });

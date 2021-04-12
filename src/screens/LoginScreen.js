@@ -1,19 +1,23 @@
-import React, { useState } from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
-import { Text } from 'react-native-paper'
-import Background from '../components/Background'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import Button from '../components/Button'
-import TextInput from '../components/TextInput'
-import BackButton from '../components/BackButton'
-import { theme } from '../core/theme'
-import { emailValidator } from '../helpers/emailValidator'
-import { passwordValidator } from '../helpers/passwordValidator'
+import React, {useState} from 'react';
+import {TouchableOpacity, StyleSheet, View} from 'react-native';
+import {Text} from 'react-native-paper';
+import Background from '../components/Background';
+import Logo from '../components/Logo';
+import Button from '../components/Button';
+import TextInput from '../components/TextInput';
+import Gap from '../components/Gap';
+import BackButton from '../components/BackButton';
+import {theme} from '../core/theme';
+import {emailValidator} from '../helpers/emailValidator';
+import {passwordValidator} from '../helpers/passwordValidator';
+import {useForm} from '../utils';
+import Header from '../components/Header/Header';
 
-const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState({ value: '', error: '' })
-  const [password, setPassword] = useState({ value: '', error: '' })
+const LoginScreen = ({navigation}) => {
+  const [form, setForm] = useForm({
+    email: '',
+    password: '',
+  });
 
   const onLoginPressed = () => {
     // const emailError = emailValidator(email.value)
@@ -27,73 +31,55 @@ const LoginScreen = ({ navigation }) => {
     //   index: 0,
     //   routes: [{ name: 'Dashboard' }],
     // })
-    navigation.navigate('Dashboard')
-  }
+    navigation.navigate('RegisterScreen');
+  };
 
   return (
-    <Background>
-      <BackButton goBack={navigation.goBack} />
-      <Logo />
-      <Header>Welcome back.</Header>
-      <TextInput
-        label="Email"
-        returnKeyType="next"
-        value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: '' })}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
-      />
-      <TextInput
-        label="Password"
-        returnKeyType="done"
-        value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: '' })}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry
-      />
-      <View style={styles.forgotPassword}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('ForgotPasswordScreen')}
-        >
-          <Text style={styles.forgot}>Forgot your password?</Text>
-        </TouchableOpacity>
+    <View style={styles.page}>
+      <Header title="Sign In" subTitle="Find your meal" />
+      <View style={styles.container}>
+        <TextInput
+          placeholder="Email"
+          label="Email Address"
+          value={form.email}
+          onChangeText={value => setForm('email', value)}
+        />
+        <Gap height={20} />
+        <TextInput
+          placeholder="Password"
+          label="Password"
+          value={form.password}
+          secureTextEntry
+          onChangeText={value => setForm('password', value)}
+        />
+        <Gap height={24} />
+        <Button
+          text="Sign In"
+          onPress={() => navigation.navigate('Dashboard')}
+        />
+        <Gap height={12} />
+        <Button
+          text="Create new Account"
+          color="#8d92a3"
+          btnColor="white"
+          onPress={onLoginPressed}
+        />
       </View>
-      <Button mode="contained" onPress={onLoginPressed}>
-        Login
-      </Button>
-      <View style={styles.row}>
-        <Text>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
-          <Text style={styles.link}>Sign up</Text>
-        </TouchableOpacity>
-      </View>
-    </Background>
-  )
-}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-  forgotPassword: {
-    width: '100%',
-    alignItems: 'flex-end',
-    marginBottom: 24,
+  page: {
+    flex: 1,
   },
-  row: {
-    flexDirection: 'row',
-    marginTop: 4,
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    paddingHorizontal: 24,
+    paddingVertical: 26,
+    marginTop: 24,
   },
-  forgot: {
-    fontSize: 13,
-    color: theme.colors.secondary,
-  },
-  link: {
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-})
+});
 
-export default LoginScreen
+export default LoginScreen;

@@ -1,42 +1,32 @@
-import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
-import { TextInput as Input } from 'react-native-paper'
-import { theme } from '../core/theme'
+import React from 'react';
+import {StyleSheet, Text, View, TextInput as TextInputRN} from 'react-native';
 
-const TextInput = ({ errorText, description, ...props }) => (
-  <View style={styles.container}>
-    <Input
-      style={styles.input}
-      selectionColor={theme.colors.primary}
-      underlineColor="transparent"
-      mode="outlined"
-      {...props}
-    />
-    {description && !errorText ? (
-      <Text style={styles.description}>{description}</Text>
-    ) : null}
-    {errorText ? <Text style={styles.error}>{errorText}</Text> : null}
-  </View>
-)
+const TextInput = ({label, placeholder, ...restProps}) => {
+  return (
+    <View>
+      <Text style={styles.label}>{label}</Text>
+      <TextInputRN
+        placeholder={placeholder}
+        style={styles.input}
+        {...restProps}
+      />
+    </View>
+  );
+};
+
+export default TextInput;
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    marginVertical: 12,
+  label: {
+    fontSize: 16,
+    fontFamily: 'Poppins-Regular',
+    color: '#020202',
+    marginBottom: 10,
   },
   input: {
-    backgroundColor: theme.colors.surface,
+    borderWidth: 1,
+    borderColor: '#020202',
+    borderRadius: 8,
+    padding: 10,
   },
-  description: {
-    fontSize: 13,
-    color: theme.colors.secondary,
-    paddingTop: 8,
-  },
-  error: {
-    fontSize: 13,
-    color: theme.colors.error,
-    paddingTop: 8,
-  },
-})
-
-export default TextInput
+});
