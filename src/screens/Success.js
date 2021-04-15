@@ -1,27 +1,32 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import SuccessImg from '../Image/success1.png';
+import {StyleSheet, Text, View} from 'react-native';
+import {IlSuccessOrder} from '../assets';
+import Gap from '../components/Gap';
 
 const Success = ({navigation}) => {
   return (
-    <View style={styles.image}>
-      <Image source={SuccessImg} style={styles.iconContainer} />
-      <Text style={styles.textlogin}>Berhasil Checkout</Text>
-      <View style={styles.buttonSection}>
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          onPress={() => navigation.navigate('Dashboard')}>
-          <Text
-            style={{
-              fontSize: 12,
-              fontWeight: 'bold',
-              color: 'white',
-              textTransform: 'uppercase',
-              textAlign: 'center',
-            }}>
-            Done
-          </Text>
-        </TouchableOpacity>
+    <View style={styles.page}>
+      <IlSuccessOrder />
+      <Gap height={30} />
+      <Text style={styles.title}>You’ve Made Order</Text>
+      <Gap height={6} />
+      <Text style={styles.subTitle}>Just stay at home while we are</Text>
+      <Text style={styles.subTitle}>preparing your best foods</Text>
+      <Gap height={30} />
+      <View style={styles.buttonContainer}>
+        <Button
+          text="Order Other Foods"
+          onPress={() => navigation.replace('MainApp')}
+        />
+      </View>
+      <Gap height={12} />
+      <View style={styles.buttonContainer}>
+        <Button
+          text="View My Order"
+          // onPress={() => navigation.replace('MainApp', {screen: 'Order'})}
+          color="#8D92A3"
+          textColor="white"
+        />
       </View>
     </View>
   );
@@ -30,62 +35,16 @@ const Success = ({navigation}) => {
 export default Success;
 
 const styles = StyleSheet.create({
-  textStyle: {
-    marginTop: 50,
-    margin: 20,
-    fontSize: 20,
-    textAlign: 'center',
-    backgroundColor: 'skyblue',
-    padding: 10,
-    borderRadius: 20,
-  },
-  textlogin: {
-    // margin: 15,
-
-    paddingLeft: 30,
-    marginBottom: 10,
-    fontSize: 20,
-    marginTop: 20,
-    marginLeft: 65,
-  },
-  textGeo: {
-    paddingLeft: 30,
-    fontSize: 15,
-  },
-  textTime: {
-    paddingLeft: 30,
-    fontSize: 15,
-  },
-
-  iconContainer: {
-    paddingVertical: 17,
-    paddingHorizontal: 16,
-    borderTopLeftRadius: 1,
-    borderTopRightRadius: 1,
-    flexDirection: 'column',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    width: 200,
-    height: 200,
-  },
-  image: {
-    padding: 20,
-    marginTop: 50,
-    marginBottom: 10,
+  page: {
     flex: 1,
-  },
-  buttonSection: {
-    width: '100%',
-    height: '20%',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
+  title: {fontSize: 20, fontFamily: 'Poppins-Regular', color: '#020202'},
+  subTitle: {fontSize: 14, fontFamily: 'Poppins-Light', color: '#8D92A3'},
   buttonContainer: {
-    backgroundColor: '#009688',
-    borderRadius: 10,
-    paddingVertical: 15,
-    paddingHorizontal: 70,
-    marginBottom: 25,
-    marginTop: 20,
+    width: '100%',
+    paddingHorizontal: 80,
   },
 });

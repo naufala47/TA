@@ -19,6 +19,7 @@ import FoodCard from '../components/FoodCard';
 import axios from 'axios';
 
 import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../assets';
+import HomeTabSection from '../components/HomeTabSection';
 
 const url = 'https://admin-appv1.herokuapp.com/api/v1/items/';
 const Dashboard = ({navigation}) => {
@@ -142,6 +143,9 @@ const Dashboard = ({navigation}) => {
           </View>
         </ScrollView>
       </View>
+      <View style={styles.tabContainer}>
+        <HomeTabSection />
+      </View>
     </ScrollView>
   );
 };
@@ -204,5 +208,8 @@ const styles = StyleSheet.create({
   foodCardContainer: {
     flexDirection: 'row',
     marginVertical: 12,
+  },
+  tabContainer: {
+    flex: 1,
   },
 });
