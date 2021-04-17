@@ -143,9 +143,7 @@ const Dashboard = ({navigation}) => {
           </View>
         </ScrollView>
       </View>
-      <View style={styles.tabContainer}>
-        <HomeTabSection />
-      </View>
+      <View style={styles.tabContainer}>{/* <HomeTabSection /> */}</View>
     </ScrollView>
   );
 };

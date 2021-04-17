@@ -12,12 +12,16 @@ import {emailValidator} from '../helpers/emailValidator';
 import {passwordValidator} from '../helpers/passwordValidator';
 import {useForm} from '../utils';
 import Header from '../components/Header/Header';
+import {useDispatch} from 'react-redux';
+import {signInAction} from '../redux/action/auth';
 
 const LoginScreen = ({navigation}) => {
   const [form, setForm] = useForm({
     email: '',
     password: '',
   });
+
+  const dispatch = useDispatch();
 
   const onLoginPressed = () => {
     // const emailError = emailValidator(email.value)
@@ -31,7 +35,8 @@ const LoginScreen = ({navigation}) => {
     //   index: 0,
     //   routes: [{ name: 'Dashboard' }],
     // })
-    navigation.navigate('RegisterScreen');
+    // navigation.navigate('RegisterScreen');
+    dispatch(signInAction(form, navigation));
   };
 
   return (
