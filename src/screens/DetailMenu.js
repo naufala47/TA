@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   ScrollView,
@@ -8,11 +8,11 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import {FoodDummy2, IcBackWhite} from '../assets';
+import { FoodDummy2, IcBackWhite } from '../assets';
 
 import Button from '../components/Button';
 
-const DetailMenu = ({navigation, route}) => {
+const DetailMenu = ({ navigation, route }) => {
   //   const [totalItem, setTotalItem] = useState(1);
   const {
     id,
@@ -121,7 +121,7 @@ const DetailMenu = ({navigation, route}) => {
               : '',
           }}
           style={styles.cover}>
-          <TouchableOpacity style={styles.back}>
+          <TouchableOpacity style={styles.back} onPress={() => navigation.navigate('Dashboard')}>
             <IcBackWhite />
           </TouchableOpacity>
         </ImageBackground>
@@ -150,7 +150,7 @@ const DetailMenu = ({navigation, route}) => {
             <View style={styles.button}>
               <Button
                 text="Order Now"
-                onPress={() => navigation.navigate('Checkout')}
+                onPress={() => navigation.navigate('Cart')}
               />
             </View>
           </View>

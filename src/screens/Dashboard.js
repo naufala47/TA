@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ScrollView,
   Text,
@@ -8,21 +8,21 @@ import {
   FlatList,
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
-import {block} from 'react-native-reanimated';
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { block } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {SliderBox} from 'react-native-image-slider-box';
+import { SliderBox } from 'react-native-image-slider-box';
 import CardSilder from 'react-native-cards-slider';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import Gap from '../components/Gap';
 import FoodCard from '../components/FoodCard';
 import axios from 'axios';
 
-import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../assets';
+import { FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4 } from '../assets';
 import HomeTabSection from '../components/HomeTabSection';
 
 const url = 'https://admin-appv1.herokuapp.com/api/v1/items/';
-const Dashboard = ({navigation}) => {
+const Dashboard = ({ navigation }) => {
   const [datas, setDatas] = useState([]);
   const [country, setCountry] = useState('pilih');
   const [images, setImages] = useState([
@@ -61,30 +61,30 @@ const Dashboard = ({navigation}) => {
   return (
     <ScrollView style={styles.container}>
       <View
-        style={{
-          marginHorizontal: 30,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <Icon name="bars" size={30} color="#0099ff" />
-        </TouchableOpacity>
-        {/* h1 menu */}
+        style={{ backgroundColor: 'orange', height: 250, borderBottomLeftRadius: 50, borderBottomRightRadius: 50 }}>
+        <View
+          style={{
+            marginTop: 25,
+            marginHorizontal: 30,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <Icon name="bars" size={25} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
+            <Icon name="cart-plus" size={25} color="white" />
+          </TouchableOpacity>
+        </View>
         <Text style={styles.h1}>MENU</Text>
+        <Text style={{ marginLeft: 30, color: 'white', fontWeight: 'bold' }}>Dashboard</Text>
+        <View>
+          {/* text input search */}
+          {/* <TextInput style={styles.textInput} placeholder="Search" /> */}
 
-        {/* icon cart */}
-        <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
-          <Icon name="cart-plus" size={30} color="#0099ff" />
-        </TouchableOpacity>
-      </View>
-
-      <View>
-        {/* text input search */}
-        <TextInput style={styles.textInput} placeholder="Search" />
-
-        {/* dropdown  */}
-        {/* <DropDownPicker
+          {/* dropdown  */}
+          {/* <DropDownPicker
           //item dropdown
           items={[
             {label: 'Pilih', value: 'pilih', hidden: true},
@@ -101,23 +101,25 @@ const Dashboard = ({navigation}) => {
           dropDownStyle={{backgroundColor: '#fafafa'}}
           onChangeItem={item => setCountry(item.value)}
         /> */}
-        {/* dropdown  */}
+          {/* dropdown  */}
+        </View>
+        {/* image slider */}
+        <SliderBox
+          style={{
+            height: 200,
+            marginLeft: 30,
+            marginRight: 25,
+            marginTop: 10,
+            marginBottom: 10,
+            borderRadius: 30
+          }}
+          images={images}
+          autoplay
+          circleLoop
+        />
       </View>
-
-      {/* image slider */}
-      <SliderBox
-        style={{
-          height: 200,
-          marginLeft: 30,
-          marginRight: 25,
-          marginTop: 10,
-          marginBottom: 10,
-        }}
-        images={images}
-        autoplay
-        circleLoop
-      />
-      <View>
+      <View style={{ marginTop: 120 }}>
+        <Text style={{ marginLeft: 30, color: 'black', fontWeight: 'bold' }}>Temukan menu yang cocok untukmu</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.foodCardContainer}>
             <Gap width={24} />
@@ -152,18 +154,17 @@ export default Dashboard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 40,
   },
   h1: {
-    color: '#0099ff',
-    marginLeft: 20,
-    fontSize: 20,
-    textAlign: 'center',
+    color: 'white',
+    marginLeft: 28,
+    fontSize: 50,
+    textAlign: 'left',
     fontWeight: 'bold',
   },
   buttonTitle: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
   },
   buttonStyle: {

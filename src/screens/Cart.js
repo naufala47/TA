@@ -1,17 +1,19 @@
-import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Header from '../screens/Cart/Header';
 import Item from '../screens/Cart/Item';
 import Footer from '../screens/Cart/Footer';
 import Basket from '../screens/Cart/BasketComponent';
 
-const Cart = ({navigation}) => {
+const Cart = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Header onPress={() => navigation.navigate('Dashboard')} />
-      <Item />
-      <Basket />
-      <Footer onPress={() => navigation.navigate('Checkout')} />
+      <ScrollView>
+        <Header onPress={() => navigation.navigate('Dashboard')} />
+        <Item />
+        <Basket />
+        <Footer onPress={() => navigation.navigate('Checkout')} />
+      </ScrollView>
     </View>
   );
 };
@@ -21,7 +23,6 @@ export default Cart;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 60,
   },
   h1: {
     color: '#0099ff',

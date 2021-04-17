@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import TotalComp from './TotalComponent';
 
-const Footer = ({navigation, onPress}) => {
+const Footer = ({ navigation, onPress }) => {
   const {
     containerStyle,
     buttonContainerStyle,
@@ -16,7 +16,7 @@ const Footer = ({navigation, onPress}) => {
       <View style={buttonContainerStyle}>
         <TouchableOpacity onPress={onPress} style={styles.btnCheckout}>
           <View style={checkoutButtonStyle}>
-            <Text style={{color: '#fff'}}>Go to checkout</Text>
+            <Text style={{ color: '#fff', fontSize: 16 }}>Go to checkout</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -45,7 +45,7 @@ const styles = {
     borderRadius: 3,
   },
   btnCheckout: {
-    marginLeft: 140,
+    marginLeft: 150,
   },
 };
 

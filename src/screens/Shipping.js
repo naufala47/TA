@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import React, { Component } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ShippingPartner from '../components/ShippingPartner';
 
-const Shipping = ({navigation}) => {
+const Shipping = ({ navigation }) => {
   return (
     <View
       style={{
@@ -45,7 +45,7 @@ const Shipping = ({navigation}) => {
           </View>
         </View>
       </View>
-      <View
+      {/* <View
         style={{
           paddingVertical: 15,
           flex: 1,
@@ -118,7 +118,7 @@ const Shipping = ({navigation}) => {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };

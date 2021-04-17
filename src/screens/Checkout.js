@@ -9,48 +9,56 @@ import {
 import TextInput from '../components/TextInput';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Gap from '../components/Gap';
+import Shipping from './Shipping';
+import Payment from './Payment';
 
-const Checkout = ({navigation}) => {
+const Checkout = ({ navigation }) => {
   return (
-    <View
-      style={{
-        flex: 1,
-        padding: 20,
-      }}>
-      <ScrollView>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
-            <Icon
-              name="angle-double-left"
-              size={50}
-              color="black"
+    <ScrollView style={{ backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: 'orange', flex: 1, padding: 20, }}>
+        <View>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
+              <Icon
+                name="angle-double-left"
+                size={30}
+                color="white"
               // onPress={handlePress}
-            />
-          </TouchableOpacity>
-          <View>
-            <View style={styles.container}>
-              <Text style={styles.title}>Checkout</Text>
+              />
+            </TouchableOpacity>
+            <View>
+              <View style={styles.container}>
+                <Text style={styles.title}>Order Confirm</Text>
+              </View>
             </View>
           </View>
-        </View>
-        <View style={{marginTop: 30}}>
-          <TextInput label="Nama" />
-          <Gap height={24} />
+          <View style={{ backgroundColor: 'white', borderRadius: 30, marginBottom: 20, marginTop: 30 }}>
+            <View style={{ marginTop: 30, marginLeft: 30, marginRight: 30, marginBottom: 30 }}>
+              <TextInput label="Nama" placeholder="Masukkan Nama" />
+              <Gap height={24} />
 
-          <TextInput label="No Hp" />
-          <Gap height={24} />
+              <TextInput label="No Hp" placeholder="Masukkan No.Hp" />
+              <Gap height={24} />
 
-          <TextInput label="Alamat" />
-        </View>
-        <View style={{marginTop: 30}}>
-          <TouchableOpacity onPress={() => navigation.navigate('Shipping')}>
-            <View style={styles.buttonCart}>
-              <Text style={styles.textCart}>Confirm</Text>
+              <TextInput label="Alamat" placeholder="Masukkan Alamat" />
             </View>
-          </TouchableOpacity>
+          </View>
+          <View style={{ backgroundColor: 'white', borderRadius: 30, marginBottom: 20 }}>
+            <Shipping />
+          </View>
+          <View style={{ backgroundColor: 'white', borderRadius: 30 }}>
+            <Payment />
+          </View>
         </View>
-      </ScrollView>
-    </View>
+      </View>
+      <View style={{ marginTop: 20, marginBottom: 15, elevation: 2 }}>
+        <TouchableOpacity onPress={() => navigation.navigate('Success')}>
+          <View style={styles.buttonCart}>
+            <Text style={styles.textCart}>Pesan</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -71,6 +79,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    fontWeight: 'bold',
+    color: 'white',
     marginRight: 20,
   },
   textInput: {
@@ -78,7 +88,7 @@ const styles = StyleSheet.create({
     // marginBottom: 20,
   },
   buttonCart: {
-    backgroundColor: 'skyblue',
+    backgroundColor: '#33cc33',
     height: 60,
     borderRadius: 30,
     justifyContent: 'center',
