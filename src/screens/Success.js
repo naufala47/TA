@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {IlSuccessOrder} from '../assets';
+import Button from '../components/Button';
 import Gap from '../components/Gap';
 
 const Success = ({navigation}) => {

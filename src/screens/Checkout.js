@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import TextInput from '../components/TextInput';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Gap from '../components/Gap';
 
 const Checkout = ({navigation}) => {
   return (
@@ -33,11 +34,12 @@ const Checkout = ({navigation}) => {
           </View>
         </View>
         <View style={{marginTop: 30}}>
-          <Text style={styles.textInput}>Masukkan Nama</Text>
           <TextInput label="Nama" />
-          <Text style={styles.textInput}>Masukkan No.Hp</Text>
+          <Gap height={24} />
+
           <TextInput label="No Hp" />
-          <Text style={styles.textInput}>Masukkan Alamat</Text>
+          <Gap height={24} />
+
           <TextInput label="Alamat" />
         </View>
         <View style={{marginTop: 30}}>
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     color: 'grey',
+    // marginBottom: 20,
   },
   buttonCart: {
     backgroundColor: 'skyblue',

@@ -14,16 +14,16 @@ import Button from '../components/Button';
 
 const DetailMenu = ({navigation, route}) => {
   //   const [totalItem, setTotalItem] = useState(1);
-    const {
-      id,
-      name,
-      bahanId,
-      stepId,
-      imageId,
-      price,
-      city,
-      description,
-    } = route.params;
+  const {
+    id,
+    name,
+    bahanId,
+    stepId,
+    imageId,
+    price,
+    city,
+    description,
+  } = route.params;
 
   //   const onOrder = () => {
   //     const totalPrice = totalItem * price;
@@ -148,7 +148,10 @@ const DetailMenu = ({navigation, route}) => {
               {/* <Text style={styles.priceTotal}>IDR 12.000</Text> */}
             </View>
             <View style={styles.button}>
-              <Button text="Order Now"  />
+              <Button
+                text="Order Now"
+                onPress={() => navigation.navigate('Checkout')}
+              />
             </View>
           </View>
         </View>
