@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   Text,
@@ -8,24 +8,25 @@ import {
   TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { SliderBox } from 'react-native-image-slider-box';
+import {SliderBox} from 'react-native-image-slider-box';
 
 import Gap from '../components/Gap';
 import FoodMenu from '../components/FoodMenu';
 import FoodCard from '../components/FoodCard';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
-import { FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4 } from '../assets';
+import {FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4} from '../assets';
 import HomeTabSection from '../components/HomeTabSection';
-import { getFoodData } from '../redux/action';
+import {getFoodData} from '../redux/action';
 import ProfileTabSection from '../components/ProfileTabSection';
-import { Input } from '@ui-kitten/components';
+import SearchInput from '../components/SearchInput';
 
 // const url = 'http://food-store.masuk.id/api/api/food?name=';
-const Dashboard = ({ navigation }) => {
+const Dashboard = ({navigation}) => {
   const dispatch = useDispatch();
-  const { food } = useSelector(state => state.homeReducer);
+  const [keyword, setKeyword] = useState(food);
+  const {food} = useSelector(state => state.homeReducer);
   const [images, setImages] = useState([
     'https://blogpictures.99.co/makanan-khas-indonesia-header.png',
     'https://cdn.popbela.com/content-images/post/20200417/2f4801387f2c957d598dfe8dd74b11bf_750x500.jpg',
@@ -36,6 +37,14 @@ const Dashboard = ({ navigation }) => {
   useEffect(() => {
     dispatch(getFoodData());
   }, []);
+
+  const searchFilterFunction = text => {
+    setKeyword({
+      keyword: food.filter(i =>
+        i.name.toLowerCase().includes(text.toLowerCase()),
+      ),
+    });
+  };
 
   return (
     // <ScrollView>
@@ -83,11 +92,18 @@ const Dashboard = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Icon name="bars" size={25} color="white" />
           </TouchableOpacity>
-          <View style={{ marginTop: 10 }}>
+          {/* <View style={{marginTop: 10}}>
             <TextInput
-              style={{ backgroundColor: 'white', width: 300, borderRadius: 15 }}
-              placeholder="search" />
-          </View>
+              value={keyword}
+              style={{backgroundColor: 'white', width: 300, borderRadius: 15}}
+              placeholder="search"
+            />
+          </View> */}
+          {/* <Text style={styles.text} category="s2">
+            Find Food
+          </Text> */}
+          <Gap height={20} />
+          <SearchInput onFilter={text => searchFilterFunction(text)} />
           {/* <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
             <Icon name="cart-plus" size={25} color="white" />
           </TouchableOpacity> */}
@@ -106,8 +122,8 @@ const Dashboard = ({ navigation }) => {
           circleLoop
         />
       </View>
-      <View style={{ marginTop: 120 }}>
-        <Text style={{ marginLeft: 30, color: 'black', fontWeight: 'bold' }}>
+      <View style={{marginTop: 120}}>
+        <Text style={{marginLeft: 30, color: 'black', fontWeight: 'bold'}}>
           Temukan menu yang cocok untukmu
         </Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -120,7 +136,7 @@ const Dashboard = ({ navigation }) => {
                   key={itemFood.id}
                   name={itemFood.name}
                   rating={itemFood.rate}
-                  image={{ uri: itemFood.picturePath }}
+                  image={{uri: itemFood.picturePath}}
                   onPress={() => navigation.navigate('DetailMenu', itemFood)}
                 />
               );
@@ -128,8 +144,8 @@ const Dashboard = ({ navigation }) => {
           </View>
         </ScrollView>
       </View>
-      <View style={{ marginTop: 15 }}>
-        <Text style={{ marginLeft: 30, color: 'black', fontWeight: 'bold' }}>
+      <View style={{marginTop: 15}}>
+        <Text style={{marginLeft: 30, color: 'black', fontWeight: 'bold'}}>
           Temukan lebih banyak lagi
         </Text>
         <ScrollView>
@@ -143,7 +159,7 @@ const Dashboard = ({ navigation }) => {
                   name={itemFood.name}
                   rating={itemFood.rate}
                   types={itemFood.types}
-                  image={{ uri: itemFood.picturePath }}
+                  image={{uri: itemFood.picturePath}}
                   onPress={() => navigation.navigate('DetailMenu', itemFood)}
                 />
               );
@@ -163,7 +179,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  page: { flex: 1 },
+  page: {flex: 1},
   h1: {
     color: 'white',
     marginLeft: 28,
@@ -208,6 +224,7 @@ const styles = StyleSheet.create({
   },
   foodCardContainer1: {
     marginVertical: 12,
+    // marginHorizontal: 20,
   },
   tabContainer: {
     flex: 1,
