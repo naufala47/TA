@@ -1,7 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import {FoodDummy2} from '../assets';
-// import Rating from '../Rating';
+import Number from './Number';
+import Rating from './Rating';
 
 const ItemListFood = ({
   image,
@@ -22,9 +23,9 @@ const ItemListFood = ({
           <>
             <View style={styles.content}>
               <Text style={styles.title}>{name}</Text>
-              <Text style={styles.price}>{price}</Text>
+              <Number number={price} style={styles.price} />
             </View>
-            {/* <Rating number={rating} /> */}
+            <Rating number={rating} />
           </>
         );
       case 'order-summary':
@@ -33,7 +34,7 @@ const ItemListFood = ({
           <>
             <View style={styles.content}>
               <Text style={styles.title}>{name}</Text>
-              <Text style={styles.price}>{price}</Text>
+              <Number number={price} style={styles.price} />
 
               {/* <Text style={styles.price}>IDR {price}</Text> */}
             </View>
@@ -49,14 +50,14 @@ const ItemListFood = ({
               <View style={styles.row}>
                 <Text style={styles.price}>{items} items</Text>
                 <View style={styles.dot} />
-                <Text style={styles.price}>{price}</Text>
+                <Number number={price} style={styles.price} />
               </View>
             </View>
           </>
         );
       case 'past-orders':
         // item past orders
-
+        const formatedDate = new Date(date).toDateString();
         return (
           <>
             <View style={styles.content}>
@@ -64,7 +65,7 @@ const ItemListFood = ({
               <View style={styles.row}>
                 <Text style={styles.price}>{items} items</Text>
                 <View style={styles.dot} />
-                <Text style={styles.price}>{price}</Text>
+                <Number number={price} style={styles.price} />
               </View>
             </View>
             <View>
@@ -79,9 +80,9 @@ const ItemListFood = ({
           <>
             <View style={styles.content}>
               <Text style={styles.title}>{name}</Text>
-              <Text style={styles.price}>{price}</Text>
+                    <Number number={price} style={styles.price} />
             </View>
-            {/* <Rating /> */}
+            <Rating />
           </>
         );
     }

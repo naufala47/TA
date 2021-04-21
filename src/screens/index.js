@@ -16,3 +16,7 @@ export {default as Shipping} from './Shipping';
 export {default as Resep} from './Resep';
 export {default as DetailResep} from './DetailResep';
 export {default as Success} from './Success';
+export {default as SignUpAddress} from './SignUpAddress';
+export {default as SuccessSignup} from './SuccessSignup';
+export {default as OrderSummary} from './OrderSummary';
+export {default as OrderDetail} from './OrderDetail';

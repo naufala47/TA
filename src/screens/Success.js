@@ -17,14 +17,14 @@ const Success = ({navigation}) => {
       <View style={styles.buttonContainer}>
         <Button
           text="Order Other Foods"
-          onPress={() => navigation.replace('MainApp')}
+          onPress={() => navigation.replace('Dashboard')}
         />
       </View>
       <Gap height={12} />
       <View style={styles.buttonContainer}>
         <Button
           text="View My Order"
-          // onPress={() => navigation.replace('MainApp', {screen: 'Order'})}
+          onPress={() => navigation.replace('Dashboard', {screen: 'Order'})}
           color="#8D92A3"
           textColor="white"
         />

@@ -58,16 +58,13 @@ const LoginScreen = ({navigation}) => {
           onChangeText={value => setForm('password', value)}
         />
         <Gap height={24} />
-        <Button
-          text="Sign In"
-          onPress={() => navigation.navigate('Dashboard')}
-        />
+        <Button text="Sign In" onPress={onLoginPressed} />
         <Gap height={12} />
         <Button
           text="Create new Account"
           color="#8d92a3"
           btnColor="white"
-          onPress={onLoginPressed}
+          onPress={() => navigation.navigate('RegisterScreen')}
         />
       </View>
     </View>

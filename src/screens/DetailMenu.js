@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Image,
   ScrollView,
@@ -8,23 +8,35 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import { FoodDummy2, IcBackWhite } from '../assets';
-
+import {FoodDummy2, IcBackWhite} from '../assets';
+import {connect} from 'react-redux';
+import cartActions from '../redux/action/cartActions';
 import Button from '../components/Button';
-
-const DetailMenu = ({ navigation, route }) => {
+import * as actions from '../redux/action/cartActions';
+import Counter from '../components/Counter';
+import Number from '../components/Number';
+import Rating from '../components/Rating';
+import {getData} from '../utils';
+const DetailMenu = props => {
   //   const [totalItem, setTotalItem] = useState(1);
   const {
     id,
     name,
-    bahanId,
-    stepId,
-    imageId,
-    price,
-    city,
+    picturePath,
     description,
-  } = route.params;
+    ingredients,
+    instructions,
+    rate,
+    price,
+  } = props.route.params;
+  const [totalItem, setTotalItem] = useState(1);
+  const [userProfile, setUserProfile] = useState({});
 
+  useEffect(() => {
+    getData('userProfile').then(res => {
+      setUserProfile(res);
+    });
+  }, []);
   //   const onOrder = () => {
   //     const totalPrice = totalItem * price;
   //     const driver = 50000;
@@ -46,82 +58,47 @@ const DetailMenu = ({ navigation, route }) => {
   //     };
   //     navigation.navigate('OrderSummary', data);
   //   };
+  const onCounterChange = value => {
+    setTotalItem(value);
+  };
+
+  const onOrder = () => {
+    const totalPrice = totalItem * price;
+    const driver = 50000;
+    const tax = (10 / 100) * totalPrice;
+    const total = totalPrice + driver + tax;
+
+    const data = {
+      item: {
+        id,
+        name,
+        price,
+        picturePath,
+      },
+      transaction: {
+        totalItem,
+        totalPrice,
+        driver,
+        tax,
+        total,
+      },
+      userProfile,
+    };
+
+    props.navigation.navigate('OrderSummary', data);
+  };
 
   return (
     <ScrollView style={styles.container}>
-      {/* <View>
-        <Text style={styles.h2top}>Detail Makanan</Text>
-
-        <Image
-          style={styles.imageStyle}
-          source={{
-            uri: 'https://blogpictures.99.co/makanan-khas-indonesia-header.png',
-          }}
-        />
-      </View>
-      <View>
-        <Text style={styles.h2}>Penjelasan :</Text>
-
-        <Text
-          style={{
-            marginLeft: 30,
-            marginRight: 25,
-          }}>
-          Food is the necessity of life. It provides nutrition, sustenance and
-          growth to human body. Food can be classified into cereals, pulses,
-          nuts and oilseeds, vegetable, fruits, milk and milk products and flesh
-          food. Food comprises protein, facts, carbohydrates, vitamins, minerals
-          salts and water.{'\n'}
-        </Text>
-      </View>
-      <View style={{marginBottom: 15}}>
-        <Text style={styles.h2}>Bahan - bahan :</Text>
-        <TextInput
-          style={styles.textInput}
-          editable={false}
-          placeholder="Bahan 1"
-        />
-        <TextInput
-          style={styles.textInput}
-          editable={false}
-          placeholder="Bahan 2"
-        />
-        <Text style={styles.h2}>Resep :</Text>
-        <TextInput
-          style={styles.textInput}
-          editable={false}
-          placeholder="Bahan 1"
-        />
-        <TextInput
-          style={styles.textInput}
-          editable={false}
-          placeholder="Bahan 2"
-        />
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Cart')}
-          style={styles.buttonStyle1}>
-          <Text style={styles.buttonTitle}>Pesan</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonStyle2}>
-          <Text style={styles.buttonTitle}>Tambah ke Cart</Text>
-        </TouchableOpacity>
-      </View>
-      end button */}
       <View style={styles.page}>
         <ImageBackground
           source={{
-            uri: imageId[0]
-              ? `https://admin-appv1.herokuapp.com/${imageId[0].imageUrl}`
-              : '',
+            uri: picturePath,
           }}
           style={styles.cover}>
-          <TouchableOpacity style={styles.back} onPress={() => navigation.navigate('Dashboard')}>
+          <TouchableOpacity
+            style={styles.back}
+            onPress={() => props.navigation.navigate('Dashboard')}>
             <IcBackWhite />
           </TouchableOpacity>
         </ImageBackground>
@@ -130,28 +107,33 @@ const DetailMenu = ({ navigation, route }) => {
             <View style={styles.productContainer}>
               <View>
                 <Text style={styles.title}>{name}</Text>
-                {/* <Rating /> */}
+                <Rating number={rate} />
               </View>
-              {/* <Counter /> */}
+              <Counter onValueChange={onCounterChange} />
             </View>
             <Text style={styles.desc}>{description}</Text>
             <Text style={styles.label}>Ingredients</Text>
-            {bahanId.map(bahan => {
-              return <Text style={styles.desc}>{bahan.name}</Text>;
-            })}
+            <Text style={styles.desc}>{ingredients}</Text>
             <Text style={styles.label}>Instructions</Text>
-            <Text style={styles.desc}>{stepId.name}</Text>
+            <Text style={styles.desc}>{instructions}</Text>
           </View>
           <View style={styles.footer}>
             <View style={styles.priceContainer}>
-              <Text style={styles.labelTotal}>Total Price: {price}</Text>
+              <Text style={styles.labelTotal}>Total Price</Text>
               {/* <Text style={styles.priceTotal}>IDR 12.000</Text> */}
+              <Number number={totalItem * price} style={styles.priceTotal} />
             </View>
-            <View style={styles.button}>
-              <Button
-                text="Order Now"
-                onPress={() => navigation.navigate('Cart')}
-              />
+            <View style={{flexDirection: 'row'}}>
+              <View>
+                <Button
+                  text="Add to Cart"
+                  color="#8D92A3"
+                  onPress={() => props.addItemToCart(props.route.params)}
+                />
+              </View>
+              <View style={styles.button}>
+                <Button text="Order Now" onPress={onOrder} />
+              </View>
             </View>
           </View>
         </View>
@@ -160,7 +142,13 @@ const DetailMenu = ({ navigation, route }) => {
   );
 };
 
-export default DetailMenu;
+const mapStateToProps = dispatch => {
+  return {
+    addItemToCart: product => dispatch(actions.addToCart({product})),
+  };
+};
+
+export default connect(null, mapStateToProps)(DetailMenu);
 
 const styles = StyleSheet.create({
   page: {
@@ -219,7 +207,10 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 163,
+    // flexDirection: 'row',
+    marginLeft: 20,
   },
+
   priceContainer: {
     flex: 1,
   },
