@@ -2,27 +2,34 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import Rating from './Rating';
 
-const FoodCard = ({ image, name, category, onPress, rating }) => {
+const FoodMenu = ({ image, name, types, onPress, rating }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
-        <Image source={image} style={styles.image} />
         <View style={styles.content}>
-          <Text style={styles.text}>{name}</Text>
-          <Text style={styles.text}>{category}</Text>
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+            <Text style={styles.text}>{name}</Text>
+            <Image source={image} style={styles.image} />
+          </View>
           <Rating number={rating} />
+          <Text style={{ color: 'grey' }}>{types}</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
 };
 
-export default FoodCard;
+export default FoodMenu;
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
+    width: 300,
     backgroundColor: 'white',
+    marginLeft: 30,
+    marginBottom: 20,
     borderRadius: 8,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 7 },
@@ -50,8 +57,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   image: {
-    width: 200,
-    height: 140,
+    width: 75,
+    height: 54,
     resizeMode: 'cover',
   },
 });

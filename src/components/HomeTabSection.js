@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,10 +7,10 @@ import {
   useWindowDimensions,
   Dimensions,
 } from 'react-native';
-import {SceneMap, TabBar, TabView} from 'react-native-tab-view';
-import {useDispatch, useSelector} from 'react-redux';
-import {getFoodDataByTypes} from '../redux/action';
-import {FoodDummy1, FoodDummy2} from '../assets';
+import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFoodDataByTypes } from '../redux/action';
+import { FoodDummy1, FoodDummy2 } from '../assets';
 import ItemListFood from '../components/ItemListFood';
 
 const renderTabBar = props => (
@@ -19,7 +19,7 @@ const renderTabBar = props => (
     indicatorStyle={styles.indicator}
     style={styles.tabBarStyle}
     tabStyle={styles.tabStyle}
-    renderLabel={({route, focused}) => (
+    renderLabel={({ route, focused }) => (
       <Text style={styles.tabText(focused)}>{route.title}</Text>
     )}
   />
@@ -54,7 +54,7 @@ const renderTabBar = props => (
 const NewTaste = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {newTaste} = useSelector(state => state.homeReducer);
+  const { newTaste } = useSelector(state => state.homeReducer);
 
   useEffect(() => {
     dispatch(getFoodDataByTypes('new_food'));
@@ -69,7 +69,7 @@ const NewTaste = () => {
             name={item.name}
             price={item.price}
             rating={item.rate}
-            image={{uri: item.picturePath}}
+            image={{ uri: item.picturePath }}
             onPress={() => navigation.navigate('DetailMenu', item)}
           />
         );
@@ -117,7 +117,7 @@ const NewTaste = () => {
 const Popular = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {popular} = useSelector(state => state.homeReducer);
+  const { popular } = useSelector(state => state.homeReducer);
 
   useEffect(() => {
     dispatch(getFoodDataByTypes('popular'));
@@ -133,7 +133,7 @@ const Popular = () => {
             name={item.name}
             price={item.price}
             rating={item.rate}
-            image={{uri: item.picturePath}}
+            image={{ uri: item.picturePath }}
             onPress={() => navigation.navigate('DetailMenu', item)}
           />
         );
@@ -181,7 +181,7 @@ const Popular = () => {
 const Recommended = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const {recommended} = useSelector(state => state.homeReducer);
+  const { recommended } = useSelector(state => state.homeReducer);
 
   useEffect(() => {
     dispatch(getFoodDataByTypes('recommended'));
@@ -196,7 +196,7 @@ const Recommended = () => {
             name={item.name}
             price={item.price}
             rating={item.rate}
-            image={{uri: item.picturePath}}
+            image={{ uri: item.picturePath }}
             onPress={() => navigation.navigate('FoodDetail', item)}
           />
         );
@@ -243,15 +243,15 @@ const Recommended = () => {
     // </View>
   );
 };
-const initialLayout = {width: Dimensions.get('window').width};
+const initialLayout = { width: Dimensions.get('window').width };
 
 const HomeTabSection = () => {
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: '1', title: 'New Taste'},
-    {key: '2', title: 'Popular'},
-    {key: '3', title: 'Recommended'},
+    { key: '1', title: 'New Taste' },
+    { key: '2', title: 'Popular' },
+    { key: '3', title: 'Recommended' },
   ]);
   const renderScene = SceneMap({
     1: NewTaste,
@@ -261,10 +261,10 @@ const HomeTabSection = () => {
   return (
     <TabView
       renderTabBar={renderTabBar}
-      navigationState={{index, routes}}
+      navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
-      initialLayout={layout}
+      initialLayout={initialLayout}
       style={styles.tabView}
     />
   );
@@ -273,7 +273,7 @@ const HomeTabSection = () => {
 export default HomeTabSection;
 
 const styles = StyleSheet.create({
-  tabView: {backgroundColor: 'white'},
+  tabView: { backgroundColor: 'white' },
   indicator: {
     backgroundColor: '#020202',
     height: 3,
@@ -287,13 +287,13 @@ const styles = StyleSheet.create({
     borderBottomColor: '#F2F2F2',
     borderBottomWidth: 1,
   },
-  tabStyle: {width: 'auto'},
+  tabStyle: { width: 'auto' },
   tabText: focused => ({
     color: focused ? '#020202' : '#8D92A3',
   }),
-  containerNewTaste: {paddingTop: 8, paddingHorizontal: 24},
-  containerPopular: {paddingTop: 8, paddingHorizontal: 24},
-  containerRecommended: {paddingTop: 8, paddingHorizontal: 24},
+  containerNewTaste: { paddingTop: 8, paddingHorizontal: 24 },
+  containerPopular: { paddingTop: 8, paddingHorizontal: 24 },
+  containerRecommended: { paddingTop: 8, paddingHorizontal: 24 },
 });
 // import * as React from 'react';
 // import {View, useWindowDimensions, Text} from 'react-native';
