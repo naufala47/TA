@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Image,
   ScrollView,
@@ -8,15 +8,15 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import {FoodDummy2, IcBackWhite} from '../assets';
-import {connect} from 'react-redux';
+import { FoodDummy2, IcBackWhite } from '../assets';
+import { connect } from 'react-redux';
 import cartActions from '../redux/action/cartActions';
 import Button from '../components/Button';
 import * as actions from '../redux/action/cartActions';
 import Counter from '../components/Counter';
 import Number from '../components/Number';
 import Rating from '../components/Rating';
-import {getData} from '../utils';
+import { getData } from '../utils';
 const DetailMenu = props => {
   //   const [totalItem, setTotalItem] = useState(1);
   const {
@@ -64,7 +64,7 @@ const DetailMenu = props => {
 
   const onOrder = () => {
     const totalPrice = totalItem * price;
-    const driver = 50000;
+    const driver = 15000;
     const tax = (10 / 100) * totalPrice;
     const total = totalPrice + driver + tax;
 
@@ -123,14 +123,7 @@ const DetailMenu = props => {
               {/* <Text style={styles.priceTotal}>IDR 12.000</Text> */}
               <Number number={totalItem * price} style={styles.priceTotal} />
             </View>
-            <View style={{flexDirection: 'row'}}>
-              <View>
-                <Button
-                  text="Add to Cart"
-                  color="#8D92A3"
-                  onPress={() => props.addItemToCart(props.route.params)}
-                />
-              </View>
+            <View style={{ flexDirection: 'row' }}>
               <View style={styles.button}>
                 <Button text="Order Now" onPress={onOrder} />
               </View>
@@ -144,7 +137,7 @@ const DetailMenu = props => {
 
 const mapStateToProps = dispatch => {
   return {
-    addItemToCart: product => dispatch(actions.addToCart({product})),
+    addItemToCart: product => dispatch(actions.addToCart({ product })),
   };
 };
 

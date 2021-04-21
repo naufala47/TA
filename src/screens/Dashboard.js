@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { SliderBox } from 'react-native-image-slider-box';
@@ -19,8 +20,9 @@ import { FoodDummy1, FoodDummy2, FoodDummy3, FoodDummy4 } from '../assets';
 import HomeTabSection from '../components/HomeTabSection';
 import { getFoodData } from '../redux/action';
 import ProfileTabSection from '../components/ProfileTabSection';
+import { Input } from '@ui-kitten/components';
 
-// const url = 'https://admin-appv1.herokuapp.com/api/v1/items/';
+// const url = 'http://food-store.masuk.id/api/api/food?name=';
 const Dashboard = ({ navigation }) => {
   const dispatch = useDispatch();
   const { food } = useSelector(state => state.homeReducer);
@@ -74,13 +76,18 @@ const Dashboard = ({ navigation }) => {
           style={{
             marginTop: 30,
             marginHorizontal: 30,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            // flexDirection: 'row',
+            alignItems: 'flex-start',
+            // justifyContent: 'space-between',
           }}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Icon name="bars" size={25} color="white" />
           </TouchableOpacity>
+          <View style={{ marginTop: 10 }}>
+            <TextInput
+              style={{ backgroundColor: 'white', width: 300, borderRadius: 15 }}
+              placeholder="search" />
+          </View>
           {/* <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
             <Icon name="cart-plus" size={25} color="white" />
           </TouchableOpacity> */}
@@ -99,7 +106,7 @@ const Dashboard = ({ navigation }) => {
           circleLoop
         />
       </View>
-      <View style={{ marginTop: 50 }}>
+      <View style={{ marginTop: 120 }}>
         <Text style={{ marginLeft: 30, color: 'black', fontWeight: 'bold' }}>
           Temukan menu yang cocok untukmu
         </Text>

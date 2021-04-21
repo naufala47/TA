@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {IcStarOff, IcStarOn} from '../assets';
+import { StyleSheet, Text, View } from 'react-native';
+import { IcStarOff, IcStarOn } from '../assets';
 
 const Rating = () => {
   return (
@@ -12,7 +12,7 @@ const Rating = () => {
         <IcStarOn />
         <IcStarOff />
       </View>
-      <Text>4</Text>
+      {/* <Text>4</Text> */}
     </View>
   );
 };
